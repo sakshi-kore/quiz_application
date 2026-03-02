@@ -1,0 +1,51 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="20260302031700" author="sakshi">
+
+        <createTable tableName="user_quiz">
+
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_id" type="BIGINT"/>
+            <column name="quiz_id" type="BIGINT"/>
+            <column name="question_id" type="BIGINT"/>
+
+            <column name="answer" type="VARCHAR(50)"/>
+
+            <column name="created_at" type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+
+            <column name="updated_at" type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="user_quiz"
+                baseColumnNames="user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"
+                constraintName="fk_user_quiz_user"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_quiz"
+                baseColumnNames="quiz_id"
+                referencedTableName="quiz"
+                referencedColumnNames="id"
+                constraintName="fk_user_quiz_quiz"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_quiz"
+                baseColumnNames="question_id"
+                referencedTableName="question"
+                referencedColumnNames="id"
+                constraintName="fk_user_quiz_question"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.10.xsd">
+    <include file="config/liquibase/liquibase/changelog/20260302124000_added_user_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260302023500_added_role_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260302024600_added_user_roles_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260302025100_added_quiz_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260302031200_added_question_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260302031700_added_user_quiz_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260302031700_added_user_result_entity.xml" relativeToChangelogFile="false"/>
+
+</databaseChangeLog>

@@ -1,0 +1,46 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="20260302031700" author="sakshi">
+
+        <createTable tableName="user_result">
+
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_quiz_id" type="BIGINT"/>
+
+            <column name="quiz_id" type="BIGINT"/>
+
+            <column name="total_attempted" type="INT"/>
+            <column name="correct_answer" type="INT"/>
+            <column name="wrong_answer" type="INT"/>
+
+            <column name="created_at" type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+
+            <column name="updated_at" type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="user_result"
+                baseColumnNames="quiz_id"
+                referencedTableName="quiz"
+                referencedColumnNames="id"
+                constraintName="fk_user_result_quiz"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_result"
+                baseColumnNames="user_quiz_id"
+                referencedTableName="user_quiz"
+                referencedColumnNames="id"
+                constraintName="fk_user_result_userquiz"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,34 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet id="20260302031200" author="sakshi">
+        <createTable tableName="question">
+
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="title" type="VARCHAR(255)"/>
+
+            <column name="description" type="VARCHAR(500)"/>
+
+            <column name="option_a" type="VARCHAR(255)"/>
+            <column name="option_b" type="VARCHAR(255)"/>
+            <column name="option_c" type="VARCHAR(255)"/>
+            <column name="option_d" type="VARCHAR(255)"/>
+
+            <column name="correct_answer" type="VARCHAR(10)"/>
+
+            <column name="created_at" type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+
+            <column name="updated_at" type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP"/>
+
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>
