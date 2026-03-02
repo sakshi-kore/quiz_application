@@ -1,5 +1,6 @@
 package com.jsp.quiz_application.controllers;
 
+import com.jsp.quiz_application.entity.AuthResponse;
 import com.jsp.quiz_application.entity.User;
 import com.jsp.quiz_application.jwts.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +22,22 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
+    public AuthResponse login(@RequestBody User user) {
 
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            user.getUserName(),
-                            user.getPassword()
-                    )
-            );
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getUserName(),
+                        user.getPassword()
+                )
+        );
 
-            System.out.println("Authentication success");
+        String token = jwtUtil.generateToken(user.getUserName());
 
-            return jwtUtil.generateToken(user.getUserName());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Authentication Failed";
-        }
+        return new AuthResponse(
+                token,
+                user.getUserName(),
+                jwtUtil.extractIssuedAt(token),
+                jwtUtil.extractExpiration(token)
+        );
     }
 }

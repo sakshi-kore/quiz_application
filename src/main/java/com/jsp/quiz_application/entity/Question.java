@@ -13,11 +13,19 @@ public class Question extends Audit{
 
     private String title;
     private String description;
-    private String optionA;
-    private String optionB;
-    private String optionC;
-    private String optionD;
+    private String option_a;
+    private String option_b;
+    private String option_c;
+    private String option_d;
     private String correctAnswer;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;
@@ -35,36 +43,20 @@ public class Question extends Audit{
         this.title = title;
     }
 
-    public String getOptionA() {
-        return optionA;
-    }
-
     public void setOptionA(String optionA) {
-        this.optionA = optionA;
-    }
-
-    public String getOptionB() {
-        return optionB;
+        this.option_a = optionA;
     }
 
     public void setOptionB(String optionB) {
-        this.optionB = optionB;
-    }
-
-    public String getOptionC() {
-        return optionC;
+        this.option_b = optionB;
     }
 
     public void setOptionC(String optionC) {
-        this.optionC = optionC;
-    }
-
-    public String getOptionD() {
-        return optionD;
+        this.option_c = optionC;
     }
 
     public void setOptionD(String optionD) {
-        this.optionD = optionD;
+        this.option_d = optionD;
     }
 
     public String getCorrectAnswer() {

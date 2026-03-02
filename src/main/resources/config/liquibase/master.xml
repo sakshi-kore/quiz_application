@@ -11,5 +11,8 @@
     <include file="config\liquibase\liquibase\changelog\20260302031200_added_question_entity.xml" relativeToChangelogFile="false"/>
     <include file="config\liquibase\liquibase\changelog\20260302031700_added_user_quiz_entity.xml" relativeToChangelogFile="false"/>
     <include file="config\liquibase\liquibase\changelog\20260302031700_added_user_result_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260302041201_added_audit.xml" relativeToChangelogFile="false"/>
+
+
 
 </databaseChangeLog>

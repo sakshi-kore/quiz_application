@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/question/**").permitAll()
                         .requestMatchers("/quiz/**").permitAll()
+                        .requestMatchers("/result/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)

@@ -29,6 +29,23 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
+    public Date extractIssuedAt(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(secret.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getIssuedAt();
+    }
+
+    public Date extractExpiration(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(secret.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
+    }
 
     public boolean validateToken(String token, String username) {
         return extractUsername(token).equals(username);

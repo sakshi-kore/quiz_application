@@ -25,6 +25,8 @@
 
             <column name="updated_at" type="DATETIME"
                     defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="updated_by" type="BIGINT"/>
 
         </createTable>
 

@@ -4,6 +4,7 @@ import com.jsp.quiz_application.entity.QuizSubmitRequest;
 import com.jsp.quiz_application.entity.*;
 import com.jsp.quiz_application.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -29,10 +30,17 @@ public class QuizSubmissionController {
 
 
     @PostMapping("/submit")
-    public String submitQuiz(@RequestBody QuizSubmitRequest request) {
+    public ResponseEntity<String> submitQuiz(@RequestBody QuizSubmitRequest request) {
+        System.out.println("UserId: " + request.getUserId());
+        System.out.println("QuizId: " + request.getQuizId());
 
-        User user = userRepository.findById(request.getUserId()).orElseThrow();
-        Quiz quiz = quizRepository.findById(request.getQuizId()).orElseThrow();
+
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + request.getUserId()));
+        Quiz quiz = quizRepository.findById(request.getQuizId())
+                .orElseThrow(() -> new RuntimeException("Quiz not found with id: " + request.getQuizId()));
+
+
 
         int totalAttempted = 0;
         int correct = 0;
@@ -43,7 +51,12 @@ public class QuizSubmissionController {
             Long questionId = entry.getKey();
             String submittedAnswer = entry.getValue();
 
-            Question question = questionRepository.findById(questionId).orElseThrow();
+            Question question = questionRepository.findById(questionId).orElse(null);
+            if (question == null) {
+                return ResponseEntity.badRequest()
+                        .body("Question not found with id: " + questionId);
+            }
+
 
 
             UserQuiz userQuiz = new UserQuiz();
@@ -72,7 +85,7 @@ public class QuizSubmissionController {
 
         userResultRepository.save(result);
 
-        return "Quiz Submitted Successfully!";
+        return ResponseEntity.ok(request.toString());
     }
 
 
