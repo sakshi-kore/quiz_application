@@ -31,6 +31,7 @@ public abstract class Audit {
     private LocalDateTime updatedAt;
 
     public User getCreatedBy() {
+
         return createdBy;
     }
 
@@ -43,22 +44,27 @@ public abstract class Audit {
     }
 
     public void setUpdatedBy(User updatedBy) {
+
         this.updatedBy = updatedBy;
     }
 
     public LocalDateTime getCreatedAt() {
+
         return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
+
         this.createdAt = createdAt;
     }
 
     public LocalDateTime getUpdatedAt() {
+
         return updatedAt;
     }
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
+
         this.updatedAt = updatedAt;
     }
 }

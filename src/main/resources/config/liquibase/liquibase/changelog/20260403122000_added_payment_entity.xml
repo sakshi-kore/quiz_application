@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+           http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="20260403122000" author="sakshi">
+
+        <createTable tableName="payment">
+
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="order_id" type="VARCHAR(255)"/>
+
+            <column name="payment_id" type="VARCHAR(255)"/>
+
+            <column name="signature" type="VARCHAR(255)"/>
+
+            <column name="amount" type="INT"/>
+
+            <column name="status" type="VARCHAR(50)"/>
+
+            <column name="user_id" type="BIGINT"/>
+
+            <column name="quiz_id" type="BIGINT"/>
+
+            <column name="created_at" type="TIMESTAMP"/>
+
+            <column name="updated_at" type="TIMESTAMP"/>
+
+            <column name="created_by" type="BIGINT"/>
+
+            <column name="updated_by" type="BIGINT"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="payment"
+                baseColumnNames="user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"
+                constraintName="fk_payment_user"/>
+
+        <addForeignKeyConstraint
+                baseTableName="payment"
+                baseColumnNames="quiz_id"
+                referencedTableName="quiz"
+                referencedColumnNames="id"
+                constraintName="fk_payment_quiz"/>
+
+    </changeSet>
+
+</databaseChangeLog>

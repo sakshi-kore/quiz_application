@@ -12,6 +12,9 @@
     <include file="config\liquibase\liquibase\changelog\20260302031700_added_user_quiz_entity.xml" relativeToChangelogFile="false"/>
     <include file="config\liquibase\liquibase\changelog\20260302031700_added_user_result_entity.xml" relativeToChangelogFile="false"/>
     <include file="config\liquibase\liquibase\changelog\20260302041201_added_audit.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260403122000_added_payment_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260703010900_locations_column_entity.xml" relativeToChangelogFile="false"/>
+    <include file="config\liquibase\liquibase\changelog\20260703065800_added_subscription_entity.xml" relativeToChangelogFile="false"/>
 
 
 

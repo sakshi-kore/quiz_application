@@ -35,18 +35,43 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+                .cors(cors -> cors.configure(http))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+
+                        // allow HTML pages
+                        .requestMatchers(
+                                "/",
+                                "/index.html",
+                                "/chatbot.html",
+                                "/payment.html",
+                                "/quiz.html",
+                                "/css/**",
+                                "/js/**"
+                        ).permitAll()
+
+                        // WebSocket endpoints
+                        .requestMatchers("/chat/**").permitAll()
+                        .requestMatchers("/app/**").permitAll()
+                        .requestMatchers("/topic/**").permitAll()
+                        .requestMatchers("/user/**").permitAll()
+
+                        // your APIs
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/firebase/**").permitAll()
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/question/**").permitAll()
-                        .requestMatchers("/quiz/**").permitAll()
+                        .requestMatchers("/quiz/create").permitAll()
+                        .requestMatchers("/quiz/all").permitAll()
                         .requestMatchers("/result/**").permitAll()
+                        .requestMatchers("/payment/**").permitAll()
+                        .requestMatchers("/webhook/**").permitAll()
+                        .requestMatchers("/subscription/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
-                .addFilterBefore(jwtFilter,
-                        UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Firebase Google Login</title>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+</head>
+
+<body>
+
+<button onclick="googleLogin()">Login with Google</button>
+
+<script>
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDK2XUTtr072JP0Jf0nfIyZQpVQ5Ny-aJA",
+      authDomain: "quizapplication-77b56.firebaseapp.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+
+function googleLogin(){
+
+const provider = new firebase.auth.GoogleAuthProvider();
+
+firebase.auth()
+.signInWithPopup(provider)
+.then(result => {
+
+result.user.getIdToken().then(token => {
+
+console.log("Firebase Token:", token);
+
+fetch("http://localhost:8081/firebase/login",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body: JSON.stringify({
+token: token
+})
+})
+
+.then(res => res.json())
+.then(data => {
+console.log("Spring Boot Response:", data);
+localStorage.setItem("jwt", data.token);
+
+alert("Login Successful");
+
+window.location.href="chatbot.html";
+});
+
+});
+
+});
+
+}
+
+
+
+</script>
+
+</body>
+
+</html>

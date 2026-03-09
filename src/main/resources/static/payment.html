@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Payment</title>
+</head>
+
+<body>
+
+<button onclick="payNow()">Pay 500</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+  function payNow(){
+
+fetch("http://localhost:8081/payment/create-order?amount=500&userId=1&quizId=1",{
+method:"POST"
+})
+.then(res=>res.json())
+.then(order=>{
+
+var options = {
+
+    "key": "rzp_test_SOMFrqPuk1vsGU",
+    "amount": order.amount,
+    "currency": "INR",
+    "name": "Quiz Application",
+    "description": "Quiz Payment",
+    "order_id": "order_SP0bGp5ItbXXkK",
+
+    "handler": function (response){
+
+        fetch("http://localhost:8081/payment/verify?userId=1&quizId=1",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(response)
+        })
+        .then(()=>alert("Payment Verified"));
+
+    }
+
+};
+
+var rzp1 = new Razorpay(options);
+rzp1.open();
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
